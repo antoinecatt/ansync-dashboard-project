@@ -1,4 +1,5 @@
 import React from 'react';
+import Chart from 'react-apexcharts';
 
 const Temperature = ({ id, temp, rangemax, rangemin, hum }) => {
   return (
