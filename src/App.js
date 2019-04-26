@@ -1,75 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import Dashboard from './components/Dashboard';
+import TempCardList from './components/TempCardList';
+import LineChart from './components/LineChart';
 import { temps } from './temps';
-
 class App extends Component {
-  state = {
-    options: {
-      chart: {
-        height: 450,
-        width: '100%',
-        type: 'bar',
-        background: '#f4f4f4',
-        foreColor: '#333'
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false
-        }
-      },
-      xaxis: {
-        categories: [
-          'Living Room',
-          'Office',
-          'Bedroom 1',
-          'Bedroom 2',
-          'Bedroom 3',
-          'Studio',
-          'Kitchen',
-          'Family Room',
-          'Dining Area',
-          'Play Room'
-        ]
-      },
-      fill: {
-        colors: ['#F44336']
-      },
-      dataLabels: {
-        enabled: false
-      },
-
-      title: {
-        text: 'Temperature By Room',
-        align: 'center',
-        margin: 20,
-        offsetY: 20,
-        style: {
-          fontSize: '25px'
-        }
-      }
-    },
-    series: [
-      {
-        name: 'Temperature',
-        data: [
-          ...temps.map(temp => {
-            const num = temp.temp;
-            return num.toString();
-          })
-        ]
-      }
-    ]
-  };
 
   render() {
     return (
       <div className="container">
-        <Dashboard
-          temps={temps}
-          series={this.state.series}
-          options={this.state.options}
-        />
+        <LineChart temps={temps}/>
+        <TempCardList temps={temps} />
       </div>
     );
   }
