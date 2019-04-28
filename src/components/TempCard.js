@@ -1,11 +1,27 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
-import { Button } from 'reactstrap';
-// TODO: ADD BOOTSTRAP FOR CARD UI, INSERT RADIALBARCHART INSIDE CARD, RENDER CARD INFO
+import LineChart from './LineChart';
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button,
+  Row,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap';
 // ADD FUNCTIONALITY TO CARD TO CHANGE RANGEMAX AND RANGEMIN
+// SHOW HISTORY BY ADDING MODAL
 // ADD FUNCTIONALITY TO CARD TO CHANGE TEMPERATURE AND UPDATE IN LINE GRAPH
 class Temperature extends Component {
   state = {
+    modal: false,
     options: {
       plotOptions: {
         radialBar: {
@@ -35,7 +51,7 @@ class Temperature extends Component {
         floating: true,
         fontSize: '16px',
         position: 'left',
-        offsetX: 160,
+        offsetX: 30,
         offsetY: 10,
         labels: {
           useSeriesColors: true
@@ -61,24 +77,45 @@ class Temperature extends Component {
         }
       ]
     },
-    series: [this.props.temperature, this.props.hum, this.props.rangemin, this.props.rangemax]
+    series: [
+      this.props.temperature,
+      this.props.hum,
+      this.props.rangemin,
+      this.props.rangemax
+    ]
+  };
+
+  toggle = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
   };
 
   render() {
-    const { id, temp, rangemax, rangemin, hum } = this.props;
-    console.log(this.props.temperature)
     return (
-      <div>
-        {/* <ul>
-          <li>{id}</li>
-          <li>{temp}</li>
-          <li>{rangemax}</li>
-          <li>{rangemin}</li>
-          <li>{hum}</li>
-        </ul> */}
-      <h3>{id}</h3>
-        <Chart series={this.state.series} options={this.state.options} type="radialBar" height="350"/>
-      </div>
+      <Col sm="6">
+        <Card body>
+          <CardTitle>{this.props.id}</CardTitle>
+          <Chart
+            series={this.state.series}
+            options={this.state.options}
+            type="radialBar"
+            height="350"
+          />
+
+          <Button onClick={this.toggle}>Button</Button>
+          <Modal
+            isOpen={this.state.modal}
+            toggle={this.toggle}
+            className={this.props.className}
+          >
+            <ModalHeader toggle={this.toggle}>History</ModalHeader>
+            <ModalBody>
+              <LineChart />
+            </ModalBody>
+          </Modal>
+        </Card>
+      </Col>
     );
   }
 }

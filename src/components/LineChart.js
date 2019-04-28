@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
-
 class LineChart extends Component {
   state = {
     options: {
@@ -50,12 +49,7 @@ class LineChart extends Component {
     series: [
       {
         name: 'Temperature',
-        data: [
-          ...this.props.temps.map(temp => {
-            const num = temp.temp;
-            return num.toString();
-          })
-        ]
+        data: [65,72,82,90,85,80,70,64,53,51]
       }
     ]
   };
