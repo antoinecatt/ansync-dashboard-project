@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <LineChart temps={temps} />
+        {/* <LineChart temps={temps} /> */}
         <TempCardList temps={temps} />
       </div>
     );

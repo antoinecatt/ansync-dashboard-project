@@ -2,15 +2,15 @@ import React from 'react';
 import TempCard from './TempCard';
 
 const TempCardList = ({ temps }) => {
-  const tempList = temps.map(temp => {
+  const tempList = temps.map(val => {
     return (
       <TempCard
-        key={temp._id}
-        id={temp.id}
-        temp={temp.temp}
-        rangemax={temp.rangemax}
-        rangemin={temp.rangemin}
-        hum={temp.hum}
+          key={val._id}
+          id={val.id}
+          temperature={parseInt(val.temp)}
+          hum={parseInt(val.hum)}
+          rangemin={parseInt(val.rangemin)}
+          rangemax={parseInt(val.rangemax)}
       />
     );
   });
