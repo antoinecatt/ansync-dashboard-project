@@ -2,15 +2,16 @@ import React from 'react';
 import TempCard from './TempCard';
 import { Row } from 'reactstrap';
 
-const TempCardList = ({ temps }) => {
+const TempCardList = ({ temps, minTemp, maxTemp }) => {
   const tempList = temps.map(val => {
+
     return (
       <TempCard
         key={val._id}
         id={val.id}
         temperature={val.temp}
-        rangemax={val.rangemax}
-        rangemin={val.rangemin}
+        rangemax={val.rangemin}
+        rangemin={val.rangemax}
         hum={val.hum}
       />
     );

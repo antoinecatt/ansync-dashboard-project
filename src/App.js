@@ -3,61 +3,54 @@ import './App.css';
 import TempCardList from './components/TempCardList';
 import NavBar from './components/NavBar';
 import { temps } from './temps';
+// import axios from 'axios';
 import {
-  Container,
-  Input,
-  FormGroup,
-  Label,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Form
+  Container
+  // Input,
+  // FormGroup,
+  // Label,
+  // Button,
+  // Modal,
+  // ModalHeader,
+  // ModalBody,
+  // Form
 } from 'reactstrap';
 class App extends Component {
-  state = {
-    formModal: false,
-    value: {
-      ...temps.map(val => {
-        return val.id;
-      })
-    },
-    minTemp: {
-      ...temps.map(val => {
-        return val.rangemin;
-      })
-    },
-    maxTemp: {
-      ...temps.map(val => {
-        return val.rangemax;
-      })
-    }
-  };
-
-  toggleForm = () => {
-    this.setState(prevState => ({
-      formModal: !prevState.formModal
-    }));
-  };
-
-  handleMinTempChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  // handleMaxTempChange = e => {
-  //   let newSeries = [
-  //     this.props.temperature,
-  //     this.props.hum,
-  //     this.props.rangemin,
-  //     e.target.value
-  //   ];
-  //   this.setState({ series: newSeries });
+  // state = {
+  //   tempData: [],
+  //   isPending: true,
+  //   formModal: false,
+  //   value: {
+  //     ...temps.map(val => {
+  //       return val.id;
+  //     })
+  //   },
+  //   minTemp: {
+  //     ...temps.map((val, i) => {
+  //       return val.rangemin;
+  //     })
+  //   },
+  //   maxTemp: {
+  //     ...temps.map(val => {
+  //       return val.rangemax;
+  //     })
+  //   }
   // };
 
-  // handleInputChange = e => {
+  // toggleForm = () => {
+  //   this.setState(prevState => ({
+  //     formModal: !prevState.formModal
+  //   }));
+  // };
 
-  //   this.setState({[e.target.name]: e.target.value})
-  // }
+  // handleTempChange = e => {
+  //   console.log(e.target.value);
+  //   this.setState({ [e.target.name]: e.target.value });
+  // };
+
+  // handleDeviceChange = e => {
+  //   this.setState({ value: e.target.value });
+  // };
 
   // handleSubmit = e => {
   //   e.preventDefault();
@@ -69,8 +62,13 @@ class App extends Component {
       <div>
         <NavBar />
         <Container>
-          <TempCardList temps={temps} />
-          <Modal
+          <TempCardList
+            temps={temps}
+            minTemp={this.state.minTemp}
+            maxTemp={this.state.maxTemp}
+            value={this.state.value}
+          />
+          {/* <Modal
             isOpen={this.state.formModal}
             toggle={this.toggleForm}
             className={this.props.className}
@@ -82,16 +80,29 @@ class App extends Component {
               <Form onSubmit={this.handleSubmit}>
                 <FormGroup>
                   <Label for="exampleSelect">Select Device</Label>
-                  <Input type="select" name="select" id="exampleSelect">
-                    {temps.map(val => {
-                      return <option key={val._id}>{val.id}</option>;
-                    })}
+                  <Input
+                    onChange={this.handleDeviceChange}
+                    value={this.state.value}
+                    type="select"
+                    name="select"
+                    id="exampleSelect"
+                  >
+                    <option value="demo1">Demo 1</option>
+                    <option value="demo2">Demo 2</option>
+                    <option value="demo3">Demo 3</option>
+                    <option value="demo4">Demo 4</option>
+                    <option value="demo5">Demo 5</option>
+                    <option value="demo6">Demo 6</option>
+                    <option value="demo7">Demo 7</option>
+                    <option value="demo8">Demo 8</option>
+                    <option value="demo9">Demo 9</option>
+                    <option value="demo10">Demo 10</option>
                   </Input>
                 </FormGroup>
                 <FormGroup>
                   <Label for="minTemp">Minimum Temperature</Label>
                   <Input
-                    onChange={this.handleMinTempChange}
+                    onChange={this.handleTempChange}
                     type="number"
                     name="minTemp"
                     id="exampleNumber"
@@ -101,9 +112,9 @@ class App extends Component {
                 <FormGroup>
                   <Label for="maxTemp">Max Temperature</Label>
                   <Input
-                    onChange={this.handleMaxTempChange}
+                    onChange={this.handleTempChange}
                     type="number"
-                    name="minTemp"
+                    name="maxTemp"
                     id="exampleNumber"
                     placeholder="Max Temp"
                   />
@@ -117,8 +128,8 @@ class App extends Component {
             color="success"
             onClick={this.toggleForm}
           >
-            Change Range
-          </Button>
+            Change Temperature Range
+          </Button> */}
         </Container>
       </div>
     );
