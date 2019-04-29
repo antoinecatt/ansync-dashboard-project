@@ -8,11 +8,7 @@ import {
   Col,
   Modal,
   ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input
+  ModalBody
 } from 'reactstrap';
 // ADD FUNCTIONALITY TO CARD TO CHANGE RANGEMAX AND RANGEMIN
 // SHOW HISTORY BY ADDING MODAL
@@ -20,8 +16,9 @@ import {
 class Temperature extends Component {
   state = {
     historyModal: false,
-    formModal: false,
     dropdownOpen: false,
+    minTemp: this.props.rangemin,
+    maxTemp: this.props.rangemax,
     options: {
       plotOptions: {
         radialBar: {
@@ -51,7 +48,7 @@ class Temperature extends Component {
         floating: true,
         fontSize: '16px',
         position: 'left',
-        offsetX: 15,
+        offsetX: -5,
         offsetY: 10,
         labels: {
           useSeriesColors: true
@@ -91,40 +88,10 @@ class Temperature extends Component {
     }));
   };
 
-  toggleForm = () => {
-    this.setState(prevState => ({
-      formModal: !prevState.formModal
-    }));
-  };
-
-  handleMinTempChange = e => {
-    let newSeries = [
-      this.props.temperature,
-      this.props.hum,
-      e.target.value,
-      this.props.rangemax
-    ];
-    this.setState({ series: newSeries });
-  };
-
-  handleMaxTempChange = e => {
-    let newSeries = [
-      this.props.temperature,
-      this.props.hum,
-      e.target.value,
-      this.props.rangemax
-    ];
-    this.setState({ series: newSeries });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log('Form was submitted');
-  };
   render() {
     return (
       <Col sm="6">
-        <Card body>
+        <Card body className="card">
           <CardTitle>{this.props.id}</CardTitle>
           <Chart
             series={this.state.series}
@@ -144,45 +111,6 @@ class Temperature extends Component {
             <ModalHeader toggle={this.toggleHistory}>History</ModalHeader>
             <ModalBody>
               <LineChart series={this.props.series} />
-            </ModalBody>
-          </Modal>
-
-          <Button className="btn" color="success" onClick={this.toggleForm}>
-            Change Range
-          </Button>
-
-          <Modal
-            isOpen={this.state.formModal}
-            toggle={this.toggleForm}
-            className={this.props.className}
-          >
-            <ModalHeader toggle={this.toggleForm}>
-              Change Temperature Range
-            </ModalHeader>
-            <ModalBody>
-              <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                  <Label for="minTemp">Minimum Temperature</Label>
-                  <Input
-                    onChange={this.handleMinTempChange}
-                    type="number"
-                    name="number"
-                    id="exampleNumber"
-                    placeholder="Min Temp"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="maxTemp">Max Temperature</Label>
-                  <Input
-                    onChange={this.handleMaxTempChange}
-                    type="number"
-                    name="number"
-                    id="exampleNumber"
-                    placeholder="Max Temp"
-                  />
-                </FormGroup>
-                <Button color="primary">Update Thermometer</Button>
-              </Form>
             </ModalBody>
           </Modal>
         </Card>
