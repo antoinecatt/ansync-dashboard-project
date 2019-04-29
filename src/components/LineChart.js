@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
+import { history } from '../history';
 class LineChart extends Component {
   state = {
     options: {
@@ -17,16 +18,16 @@ class LineChart extends Component {
       },
       xaxis: {
         categories: [
-          'Living Room',
-          'Office',
-          'Bedroom 1',
-          'Bedroom 2',
-          'Bedroom 3',
-          'Studio',
-          'Kitchen',
-          'Family Room',
-          'Dining Area',
-          'Play Room'
+          '6am',
+          '7am',
+          '8am',
+          '9am',
+          '10am',
+          '11am',
+          '12pm',
+          '1pm',
+          '2pm',
+          '3pm'
         ]
       },
       fill: {
@@ -37,7 +38,7 @@ class LineChart extends Component {
       },
 
       title: {
-        text: 'Temperature By Room',
+        text: 'Temperature History',
         align: 'center',
         margin: 20,
         offsetY: 20,
@@ -49,7 +50,12 @@ class LineChart extends Component {
     series: [
       {
         name: 'Temperature',
-        data: [65,72,82,90,85,80,70,64,53,51]
+        data: [
+          ...history.map((val, i) => {
+            console.log(val)
+            return val[i];
+          })
+        ]
       }
     ]
   };

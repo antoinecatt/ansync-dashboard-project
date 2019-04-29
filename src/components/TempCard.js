@@ -3,25 +3,25 @@ import Chart from 'react-apexcharts';
 import LineChart from './LineChart';
 import {
   Card,
-  CardImg,
-  CardText,
-  CardBody,
   CardTitle,
-  CardSubtitle,
   Button,
-  Row,
   Col,
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  Form,
+  FormGroup,
+  Label,
+  Input
 } from 'reactstrap';
 // ADD FUNCTIONALITY TO CARD TO CHANGE RANGEMAX AND RANGEMIN
 // SHOW HISTORY BY ADDING MODAL
 // ADD FUNCTIONALITY TO CARD TO CHANGE TEMPERATURE AND UPDATE IN LINE GRAPH
 class Temperature extends Component {
   state = {
-    modal: false,
+    historyModal: false,
+    formModal: false,
+    dropdownOpen: false,
     options: {
       plotOptions: {
         radialBar: {
@@ -45,13 +45,13 @@ class Temperature extends Component {
         }
       },
       colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-      labels: ['Temperature', 'Humidity', 'Min Temp', 'Max Temp'],
+      labels: ['Current Temp ºF', 'Humidity %', 'Min Temp ºF', 'Max Temp ºF'],
       legend: {
         show: true,
         floating: true,
         fontSize: '16px',
         position: 'left',
-        offsetX: 30,
+        offsetX: 15,
         offsetY: 10,
         labels: {
           useSeriesColors: true
@@ -85,12 +85,42 @@ class Temperature extends Component {
     ]
   };
 
-  toggle = () => {
+  toggleHistory = () => {
     this.setState(prevState => ({
-      modal: !prevState.modal
+      historyModal: !prevState.historyModal
     }));
   };
 
+  toggleForm = () => {
+    this.setState(prevState => ({
+      formModal: !prevState.formModal
+    }));
+  };
+
+  handleMinTempChange = e => {
+    let newSeries = [
+      this.props.temperature,
+      this.props.hum,
+      e.target.value,
+      this.props.rangemax
+    ];
+    this.setState({ series: newSeries });
+  };
+
+  handleMaxTempChange = e => {
+    let newSeries = [
+      this.props.temperature,
+      this.props.hum,
+      e.target.value,
+      this.props.rangemax
+    ];
+    this.setState({ series: newSeries });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log('Form was submitted');
+  };
   render() {
     return (
       <Col sm="6">
@@ -103,15 +133,56 @@ class Temperature extends Component {
             height="350"
           />
 
-          <Button onClick={this.toggle}>Button</Button>
+          <Button className="btn" color="info" onClick={this.toggleHistory}>
+            History
+          </Button>
           <Modal
-            isOpen={this.state.modal}
-            toggle={this.toggle}
+            isOpen={this.state.historyModal}
+            toggle={this.toggleHistory}
             className={this.props.className}
           >
-            <ModalHeader toggle={this.toggle}>History</ModalHeader>
+            <ModalHeader toggle={this.toggleHistory}>History</ModalHeader>
             <ModalBody>
-              <LineChart />
+              <LineChart series={this.props.series} />
+            </ModalBody>
+          </Modal>
+
+          <Button className="btn" color="success" onClick={this.toggleForm}>
+            Change Range
+          </Button>
+
+          <Modal
+            isOpen={this.state.formModal}
+            toggle={this.toggleForm}
+            className={this.props.className}
+          >
+            <ModalHeader toggle={this.toggleForm}>
+              Change Temperature Range
+            </ModalHeader>
+            <ModalBody>
+              <Form onSubmit={this.handleSubmit}>
+                <FormGroup>
+                  <Label for="minTemp">Minimum Temperature</Label>
+                  <Input
+                    onChange={this.handleMinTempChange}
+                    type="number"
+                    name="number"
+                    id="exampleNumber"
+                    placeholder="Min Temp"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="maxTemp">Max Temperature</Label>
+                  <Input
+                    onChange={this.handleMaxTempChange}
+                    type="number"
+                    name="number"
+                    id="exampleNumber"
+                    placeholder="Max Temp"
+                  />
+                </FormGroup>
+                <Button color="primary">Update Thermometer</Button>
+              </Form>
             </ModalBody>
           </Modal>
         </Card>

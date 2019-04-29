@@ -8,3 +8,7 @@
 .container li {
   list-style: none;
 }
+
+.btn {
+  margin: .25rem;
+}
