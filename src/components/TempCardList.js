@@ -2,9 +2,8 @@ import React from 'react';
 import TempCard from './TempCard';
 import { Row } from 'reactstrap';
 
-const TempCardList = ({ temps, minTemp, maxTemp }) => {
+const TempCardList = ({ temps }) => {
   const tempList = temps.map(val => {
-
     return (
       <TempCard
         key={val._id}

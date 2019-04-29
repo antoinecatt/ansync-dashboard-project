@@ -15,15 +15,13 @@ import {
   Input
 } from 'reactstrap';
 // ADD FUNCTIONALITY TO CARD TO CHANGE RANGEMAX AND RANGEMIN
-// SHOW HISTORY BY ADDING MODAL
 // ADD FUNCTIONALITY TO CARD TO CHANGE TEMPERATURE AND UPDATE IN LINE GRAPH
+// FIX STATTE HANDLERS
 class Temperature extends Component {
   state = {
     historyModal: false,
     formModal: false,
     dropdownOpen: false,
-    minTemp: this.props.rangemin,
-    maxTemp: this.props.rangemax,
     options: {
       plotOptions: {
         radialBar: {
@@ -31,7 +29,7 @@ class Temperature extends Component {
           startAngle: 0,
           endAngle: 270,
           hollow: {
-            margin: 5,
+            margin: -5,
             size: '30%',
             background: 'transparent',
             image: undefined
@@ -53,7 +51,7 @@ class Temperature extends Component {
         floating: true,
         fontSize: '16px',
         position: 'left',
-        offsetX: 15,
+        offsetX: 5,
         offsetY: 10,
         labels: {
           useSeriesColors: true
@@ -99,31 +97,31 @@ class Temperature extends Component {
     }));
   };
 
-  // handleMinTempChange = e => {
-  //   const {series} = this.state;
-  //   series.map(val => {
-  //     this.setState({: e.target.value})
-  //   })
-  // };
+  handleMinTempChange = e => {
+    let newSeries = [
+      this.props.temperature,
+      this.props.hum,
+      e.target.value,
+      this.props.rangemax
+    ];
 
-  // handleMaxTempChange = e => {
-  //   let newSeries = [
-  //     this.props.temperature,
-  //     this.props.hum,
-  //     this.props.rangemin,
-  //     e.target.value
-  //   ];
-  //   this.setState({ series: newSeries });
-  // };
+    this.setState({ series: newSeries });
+  };
 
-  // handleInputChange = e => {
+  handleMaxTempChange = e => {
+    let newSeries = [
+      this.props.temperature,
+      this.props.hum,
+      this.props.rangemin,
+      e.target.value
+    ];
 
-  //   this.setState({[e.target.name]: e.target.value})
-  // }
+    this.setState({ series: newSeries });
+  };
 
-  handleSubmit = e => {
+  clickHandler = e => {
     e.preventDefault();
-    alert('Thermometer Updated');
+    console.log(this.state.series);
   };
 
   render() {
@@ -165,7 +163,7 @@ class Temperature extends Component {
               Change Temperature Range
             </ModalHeader>
             <ModalBody>
-              <Form onSubmit={this.handleSubmit}>
+              <Form>
                 <FormGroup>
                   <Label for="minTemp">Minimum Temperature</Label>
                   <Input
@@ -176,6 +174,7 @@ class Temperature extends Component {
                     placeholder="Min Temp"
                   />
                 </FormGroup>
+
                 <FormGroup>
                   <Label for="maxTemp">Max Temperature</Label>
                   <Input
@@ -186,7 +185,9 @@ class Temperature extends Component {
                     placeholder="Max Temp"
                   />
                 </FormGroup>
-                <Button color="primary">Update Thermometer</Button>
+                <Button color="primary" onClick={this.clickHandler}>
+                  Update Thermostat
+                </Button>
               </Form>
             </ModalBody>
           </Modal>
