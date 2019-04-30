@@ -3,7 +3,7 @@ import TempCard from './TempCard';
 import { Row } from 'reactstrap';
 
 const TempCardList = ({ temps }) => {
-  const tempList = temps.map(val => {
+   const tempList = temps.map(val => {
     return (
       <TempCard
         key={val._id}
