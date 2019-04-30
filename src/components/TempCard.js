@@ -133,21 +133,21 @@ class Temperature extends Component {
             height="350"
           />
           <CardGroup className="CardGroup">
-            <Card class="CardGroup-info">
+            <Card className="CardGroup-info">
               <CardBody>
                 <CardTitle>Humidity</CardTitle>
                 <h3>{this.props.hum}</h3>
               </CardBody>
             </Card>
-            <Card class="CardGroup-info">
+            <Card className="CardGroup-info">
               <CardBody>
-                <CardTitle>Min</CardTitle>
+                <CardTitle>Min. Temp</CardTitle>
                 <h3>{this.state.minTemp}</h3>
               </CardBody>
             </Card>
-            <Card class="CardGroup-info">
+            <Card className="CardGroup-info">
               <CardBody>
-                <CardTitle>Max</CardTitle>
+                <CardTitle>Max Temp</CardTitle>
                 <h3>{this.state.maxTemp}</h3>
               </CardBody>
             </Card>

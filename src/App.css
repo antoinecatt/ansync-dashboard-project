@@ -23,10 +23,11 @@
 
 .CardGroup {
   height: 100%;
-  
+  margin-bottom: 1rem;
 }
 
 .CardGroup-info {
-  height: 2rem;
-  width: 10rem;
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
