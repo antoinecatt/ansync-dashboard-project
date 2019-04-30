@@ -13,7 +13,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get('http://a.iot.ansync.com:8080/api/all')
+      .get('//a.iot.ansync.com:8080/api/all')
       .then(response =>
         this.setState({ temps: response.data, isLoaded: true })
       );
