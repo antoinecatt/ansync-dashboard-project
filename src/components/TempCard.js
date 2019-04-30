@@ -78,7 +78,7 @@ class Temperature extends Component {
           type: 'horizontal',
           shadeIntensity: 0.5,
           gradientToColors: ['#ABE5A1'],
-          inverseColors: true,
+          inverseColors: false,
           opacityFrom: 1,
           opacityTo: 1,
           stops: [0, 100]
@@ -129,7 +129,7 @@ class Temperature extends Component {
             toggle={this.toggleHistory}
             className={this.props.className}
           >
-            <ModalHeader toggle={this.toggleHistory}>History</ModalHeader>
+            <ModalHeader toggle={this.toggleHistory}>{this.props.id}</ModalHeader>
             <ModalBody>
               <LineChart series={this.props.series} />
             </ModalBody>
