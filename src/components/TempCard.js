@@ -108,13 +108,9 @@ class Temperature extends Component {
     }));
   };
 
-  minTempHandler = e => {
-    this.setState({minTemp: e.target.value})
-  }
-
-  maxTempHandler = e => {
-    this.setState({maxTemp: e.target.value})
-  }
+  changeTempHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   clickHandler = e => {
     e.preventDefault();
@@ -179,14 +175,14 @@ class Temperature extends Component {
             className={this.props.className}
           >
             <ModalHeader toggle={this.toggleForm}>
-              Change Temperature Range
+              Change Temperature Range For {this.props.id.toUpperCase()}
             </ModalHeader>
             <ModalBody>
               <Form>
                 <FormGroup>
                   <Label for="minTemp">Minimum Temperature</Label>
                   <Input
-                    onChange={this.minTempHandler}
+                    onChange={this.changeTempHandler}
                     type="number"
                     name="minTemp"
                     id="exampleNumber"
@@ -197,9 +193,9 @@ class Temperature extends Component {
                 <FormGroup>
                   <Label for="maxTemp">Max Temperature</Label>
                   <Input
-                    onChange={this.maxTempHandler}
+                    onChange={this.changeTempHandler}
                     type="number"
-                    name="minTemp"
+                    name="maxTemp"
                     id="exampleNumber"
                     placeholder="Max Temp"
                   />

@@ -2,8 +2,8 @@ import React from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
 const NavBar = () => {
   return (
-    <Navbar color="light" light expand="md">
-      <NavbarBrand href="/">Radial Inc. Thermostat Dashboard</NavbarBrand>
+    <Navbar color="dark" light expand="md">
+      <NavbarBrand href="/">Radial Inc.</NavbarBrand>
     </Navbar>
   );
 };

@@ -1,3 +1,6 @@
+body {
+  background-color: #e4e5e6;
+}
 .container {
   margin: 70px auto;
   overflow: hidden;
@@ -7,6 +10,10 @@
 
 .container li {
   list-style: none;
+}
+
+.Navbar {
+  color: #fff;
 }
 
 .btn {
