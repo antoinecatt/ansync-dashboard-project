@@ -25,64 +25,71 @@ class Temperature extends Component {
     options: {
       plotOptions: {
         radialBar: {
-          offsetY: -10,
-          startAngle: 0,
-          endAngle: 270,
+          startAngle: -135,
+          endAngle: 225,
           hollow: {
-            margin: -5,
-            size: '30%',
-            background: 'transparent',
-            image: undefined
+            margin: 0,
+            size: '70%',
+            background: '#fff',
+            position: 'front',
+            dropShadow: {
+              enabled: true,
+              top: 3,
+              left: 0,
+              blur: 4,
+              opacity: 0.24
+            }
           },
+          track: {
+            background: '#fff',
+            strokeWidth: '67%',
+            margin: 0, // margin is in pixels
+            dropShadow: {
+              enabled: true,
+              top: -3,
+              left: 0,
+              blur: 4,
+              opacity: 0.35
+            }
+          },
+
           dataLabels: {
             name: {
-              show: false
+              offsetY: -10,
+              show: true,
+              color: '#888',
+              fontSize: '17px'
             },
             value: {
-              show: false
+              formatter: function(val) {
+                return parseInt(val);
+              },
+              color: '#111',
+              fontSize: '36px',
+              show: true
             }
           }
         }
       },
-      colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-      labels: ['Current Temp ºF', 'Humidity %', 'Min Temp ºF', 'Max Temp ºF'],
-      legend: {
-        show: true,
-        floating: true,
-        fontSize: '16px',
-        position: 'left',
-        offsetX: 5,
-        offsetY: 10,
-        labels: {
-          useSeriesColors: true
-        },
-        markers: {
-          size: 0
-        },
-        formatter: function(seriesName, opts) {
-          return seriesName + ':  ' + opts.w.globals.series[opts.seriesIndex];
-        },
-        itemMargin: {
-          horizontal: 1
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'dark',
+          type: 'horizontal',
+          shadeIntensity: 0.5,
+          gradientToColors: ['#ABE5A1'],
+          inverseColors: true,
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100]
         }
       },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            legend: {
-              show: false
-            }
-          }
-        }
-      ]
+      stroke: {
+        lineCap: 'round'
+      },
+      labels: ['Current Temp ºF']
     },
-    series: [
-      this.props.temperature,
-      this.props.hum,
-      this.props.rangemin,
-      this.props.rangemax
-    ]
+    series: [this.props.temperature]
   };
 
   toggleHistory = () => {
@@ -95,28 +102,6 @@ class Temperature extends Component {
     this.setState(prevState => ({
       formModal: !prevState.formModal
     }));
-  };
-
-  handleMinTempChange = e => {
-    let newSeries = [
-      this.props.temperature,
-      this.props.hum,
-      e.target.value,
-      this.props.rangemax
-    ];
-
-    this.setState({ series: newSeries });
-  };
-
-  handleMaxTempChange = e => {
-    let newSeries = [
-      this.props.temperature,
-      this.props.hum,
-      this.props.rangemin,
-      e.target.value
-    ];
-
-    this.setState({ series: newSeries });
   };
 
   clickHandler = e => {
