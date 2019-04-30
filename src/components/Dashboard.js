@@ -15,11 +15,15 @@ class Dashboard extends Component {
         this.setState({ temps: response.data, isLoaded: true })
       );
   }
+
   render() {
     return (
       <div>
         {this.state.isLoaded ? (
-          <TempCardList temps={this.state.temps} />
+          <div>
+            <h1>DASHBOARD</h1>
+            <TempCardList temps={this.state.temps} />
+          </div>
         ) : (
           <div>
             <div className="loader" />

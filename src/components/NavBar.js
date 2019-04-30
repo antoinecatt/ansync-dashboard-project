@@ -4,13 +4,12 @@ import {
   Navbar,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   return (
@@ -19,18 +18,19 @@ const NavBar = () => {
         Radial Inc.
       </NavbarBrand>
       <Nav className="ml-auto" navbar>
-        <NavItem>
-          <NavLink href="/components/">Dashboard</NavLink>
-        </NavItem>
         <UncontrolledDropdown nav inNavbar>
           <DropdownToggle nav caret>
             Menu
           </DropdownToggle>
           <DropdownMenu right>
-            <DropdownItem>Profile</DropdownItem>
-            <DropdownItem>Settings</DropdownItem>
+            <DropdownItem>Welcome Antoine!</DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>Reset</DropdownItem>
+            <DropdownItem>
+              <Link to="/">Dashboard</Link>
+            </DropdownItem>
+            <DropdownItem>
+              <Link to="/settings">Settings</Link>
+            </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>

@@ -132,19 +132,19 @@ class Temperature extends Component {
             <Card className="CardGroup-info">
               <CardBody>
                 <CardTitle>Humidity</CardTitle>
-                <h3>{this.props.hum}</h3>
+                <h3>{this.props.hum}%</h3>
               </CardBody>
             </Card>
             <Card className="CardGroup-info">
               <CardBody>
                 <CardTitle>Min. Temp</CardTitle>
-                <h3>{this.state.minTemp}</h3>
+                <h3>{this.state.minTemp}ºF</h3>
               </CardBody>
             </Card>
             <Card className="CardGroup-info">
               <CardBody>
                 <CardTitle>Max Temp</CardTitle>
-                <h3>{this.state.maxTemp}</h3>
+                <h3>{this.state.maxTemp}ºF</h3>
               </CardBody>
             </Card>
           </CardGroup>

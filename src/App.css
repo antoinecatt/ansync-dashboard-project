@@ -38,3 +38,16 @@ body {
   width: 100%;
   margin: 0;
 }
+
+.CardDeck {
+  padding: 5rem;
+}
+
+.CardImg {
+  border-top-radius: 25px;
+
+}
+
+.Card-info-settings {
+  border-radius: 5px;
+}
