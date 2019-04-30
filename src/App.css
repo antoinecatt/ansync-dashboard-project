@@ -20,3 +20,13 @@
 .card {
   margin: 1rem;
 }
+
+.CardGroup {
+  height: 100%;
+  
+}
+
+.CardGroup-info {
+  height: 2rem;
+  width: 10rem;
+}

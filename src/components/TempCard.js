@@ -12,7 +12,9 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  CardGroup,
+  CardBody
 } from 'reactstrap';
 // ADD FUNCTIONALITY TO CARD TO CHANGE RANGEMAX AND RANGEMIN
 // ADD FUNCTIONALITY TO CARD TO CHANGE TEMPERATURE AND UPDATE IN LINE GRAPH
@@ -22,6 +24,8 @@ class Temperature extends Component {
     historyModal: false,
     formModal: false,
     dropdownOpen: false,
+    minTemp: this.props.rangemin,
+    maxTemp: this.props.rangemax,
     options: {
       plotOptions: {
         radialBar: {
@@ -104,6 +108,14 @@ class Temperature extends Component {
     }));
   };
 
+  minTempHandler = e => {
+    this.setState({minTemp: e.target.value})
+  }
+
+  maxTempHandler = e => {
+    this.setState({maxTemp: e.target.value})
+  }
+
   clickHandler = e => {
     e.preventDefault();
     console.log(this.state.series);
@@ -120,6 +132,26 @@ class Temperature extends Component {
             type="radialBar"
             height="350"
           />
+          <CardGroup className="CardGroup">
+            <Card class="CardGroup-info">
+              <CardBody>
+                <CardTitle>Humidity</CardTitle>
+                <h3>{this.props.hum}</h3>
+              </CardBody>
+            </Card>
+            <Card class="CardGroup-info">
+              <CardBody>
+                <CardTitle>Min</CardTitle>
+                <h3>{this.state.minTemp}</h3>
+              </CardBody>
+            </Card>
+            <Card class="CardGroup-info">
+              <CardBody>
+                <CardTitle>Max</CardTitle>
+                <h3>{this.state.maxTemp}</h3>
+              </CardBody>
+            </Card>
+          </CardGroup>
 
           <Button className="btn" color="info" onClick={this.toggleHistory}>
             History
@@ -129,7 +161,9 @@ class Temperature extends Component {
             toggle={this.toggleHistory}
             className={this.props.className}
           >
-            <ModalHeader toggle={this.toggleHistory}>{this.props.id}</ModalHeader>
+            <ModalHeader toggle={this.toggleHistory}>
+              {this.props.id}
+            </ModalHeader>
             <ModalBody>
               <LineChart series={this.props.series} />
             </ModalBody>
@@ -152,7 +186,7 @@ class Temperature extends Component {
                 <FormGroup>
                   <Label for="minTemp">Minimum Temperature</Label>
                   <Input
-                    onChange={this.handleMinTempChange}
+                    onChange={this.minTempHandler}
                     type="number"
                     name="minTemp"
                     id="exampleNumber"
@@ -163,14 +197,14 @@ class Temperature extends Component {
                 <FormGroup>
                   <Label for="maxTemp">Max Temperature</Label>
                   <Input
-                    onChange={this.handleMaxTempChange}
+                    onChange={this.maxTempHandler}
                     type="number"
                     name="minTemp"
                     id="exampleNumber"
                     placeholder="Max Temp"
                   />
                 </FormGroup>
-                <Button color="primary" onClick={this.clickHandler}>
+                <Button color="primary" onClick={this.toggleForm}>
                   Update Thermostat
                 </Button>
               </Form>
