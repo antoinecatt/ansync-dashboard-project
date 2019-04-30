@@ -12,12 +12,12 @@ body {
   list-style: none;
 }
 
-.Navbar {
+.logo {
   color: #fff;
 }
 
 .btn {
-  margin: .25rem;
+  margin: 0.25rem;
 }
 
 .btn-form {

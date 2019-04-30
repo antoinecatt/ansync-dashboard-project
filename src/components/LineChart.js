@@ -52,7 +52,7 @@ class LineChart extends Component {
         name: 'Temperature',
         data: [
           ...history.map((val, i) => {
-            console.log(val)
+            console.log(val);
             return val[i];
           })
         ]
