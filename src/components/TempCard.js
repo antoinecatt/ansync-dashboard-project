@@ -14,7 +14,8 @@ import {
   Label,
   Input,
   CardGroup,
-  CardBody
+  CardBody,
+  Alert
 } from 'reactstrap';
 // ADD FUNCTIONALITY TO CARD TO CHANGE RANGEMAX AND RANGEMIN
 // ADD FUNCTIONALITY TO CARD TO CHANGE TEMPERATURE AND UPDATE IN LINE GRAPH
@@ -24,6 +25,7 @@ class Temperature extends Component {
     historyModal: false,
     formModal: false,
     dropdownOpen: false,
+    visible: false,
     minTemp: this.props.rangemin,
     maxTemp: this.props.rangemax,
     options: {
@@ -96,6 +98,12 @@ class Temperature extends Component {
     series: [this.props.temperature]
   };
 
+  onDismiss = () => {
+    this.setState(prevState => ({
+      visible: !prevState.visible
+    }));
+  };
+
   toggleHistory = () => {
     this.setState(prevState => ({
       historyModal: !prevState.historyModal
@@ -109,17 +117,33 @@ class Temperature extends Component {
   };
 
   changeTempHandler = e => {
+    e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   };
 
   clickHandler = e => {
     e.preventDefault();
-    console.log(this.state.series);
+
+    // console.log(this.state.minTemp, this.state.maxTemp);
+    this.setState(prevState => ({
+      formModal: !prevState.formModal,
+      visible: !prevState.visible,
+      minTemp: this.state.minTemp,
+      maxTemp: this.state.maxTemp
+    }));
   };
 
   render() {
     return (
       <Col sm="6">
+        <Alert
+          color="success"
+          isOpen={this.state.visible}
+          toggle={this.onDismiss}
+        >
+          Temperature Range Updated!
+        </Alert>
+
         <Card body>
           <CardTitle>{this.props.id}</CardTitle>
           <Chart
@@ -200,9 +224,20 @@ class Temperature extends Component {
                     placeholder="Max Temp"
                   />
                 </FormGroup>
-                <Button color="primary" onClick={this.toggleForm}>
-                  Update Thermostat
-                </Button>
+                {this.state.minTemp > this.state.maxTemp ? (
+                  <div>
+                    <Alert color="danger" isOpen="true" toggle={this.onDismiss}>
+                      Minimum temp cannot be higher than max temp!
+                    </Alert>{' '}
+                    <Button color="secondary" disabled={true}>
+                      Update Thermostat
+                    </Button>
+                  </div>
+                ) : (
+                  <Button color="primary" onClick={this.clickHandler}>
+                    Update Thermostat
+                  </Button>
+                )}
               </Form>
             </ModalBody>
           </Modal>
