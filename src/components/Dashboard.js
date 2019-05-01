@@ -11,7 +11,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     axios
-      .get('a.iot.ansync.com:8080/api/all')
+      .get('http://a.iot.ansync.com:8080/api/all')
       .then(response =>
         this.setState({ temps: response.data, isLoaded: true })
       );
@@ -20,7 +20,6 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <h1>DASHBOARD</h1>
         {this.state.isLoaded ? (
           <div>
             <h1>DASHBOARD</h1>
