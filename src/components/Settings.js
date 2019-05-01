@@ -11,7 +11,6 @@ import {
   Card,
   CardImg,
   CardTitle,
-  CardText,
   CardDeck,
   CardSubtitle,
   CardBody
