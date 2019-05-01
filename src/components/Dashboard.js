@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import TempCardList from './TempCardList';
 import { temps } from '../temps';
-import axios from 'axios';
+// import axios from 'axios';
 
 class Dashboard extends Component {
   state = {
     temps,
-    isLoaded: false
+    // isLoaded: false
   };
 
   // componentDidMount() {
@@ -20,8 +20,8 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-                    <h1>DASHBOARD</h1>
-            <TempCardList temps={this.state.temps} />
+        <h1>DASHBOARD</h1>
+        <TempCardList temps={this.state.temps} />
         {/* {this.state.isLoaded ? (
           <div>
 
