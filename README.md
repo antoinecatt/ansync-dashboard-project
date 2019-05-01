@@ -6,4 +6,8 @@ This project is a prototype of a dashboard that has a network of thermostats tha
 
 The project uses a remote API that has been given by ansync labs.
 
-ReactJS framework has been used to develop this project
+ReactJS framework has been used to develop this project.
+
+<a href="https://imgflip.com/gif/2zupl2"><img src="https://i.imgflip.com/2zupl2.gif" title="made at imgflip.com"/></a>
+
+<a href="https://imgflip.com/gif/2zupq9"><img src="https://i.imgflip.com/2zupq9.gif" title="made at imgflip.com"/></a>
