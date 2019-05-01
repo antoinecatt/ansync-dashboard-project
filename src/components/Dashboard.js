@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import TempCardList from './TempCardList';
-import { temps } from '../temps';
+// import { temps } from '../temps';
 import axios from 'axios';
 
 class Dashboard extends Component {
   state = {
-    temps,
+    temps: [],
     isLoaded: false
   };
 
