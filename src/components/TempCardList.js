@@ -9,8 +9,8 @@ const TempCardList = ({ temps }) => {
         key={val._id}
         id={val.id}
         temperature={val.temp}
-        rangemax={val.rangemin}
-        rangemin={val.rangemax}
+        rangemax={val.rangemax}
+        rangemin={val.rangemin}
         hum={val.hum}
       />
     );
