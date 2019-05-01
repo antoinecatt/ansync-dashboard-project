@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import TempCardList from './TempCardList';
+import SearchBox from './SearchBox';
 // import { temps } from '../temps';
 import axios from 'axios';
 
 class Dashboard extends Component {
   state = {
     temps: [],
-    isLoaded: false
+    isLoaded: false,
+    searchField: ''
   };
 
   componentDidMount() {
@@ -17,13 +19,23 @@ class Dashboard extends Component {
       );
   }
 
+  searchChangeHandler = e => {
+    this.setState({ searchField: e.target.value });
+  };
+
   render() {
+    const filterDevice = this.state.temps.filter(device => {
+      return device.id
+        .toLowerCase()
+        .includes(this.state.searchField.toLowerCase());
+    });
     return (
       <div>
         {this.state.isLoaded ? (
           <div>
             <h1>DASHBOARD</h1>
-            <TempCardList temps={this.state.temps} />
+            <SearchBox searchChange={this.searchChangeHandler} />
+            <TempCardList temps={filterDevice}/>
           </div>
         ) : (
           <div>

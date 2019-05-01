@@ -51,3 +51,8 @@ body {
 .Card-info-settings {
   border-radius: 5px;
 }
+
+.Form {
+  width: 25%;
+  margin: 0 auto;
+}
